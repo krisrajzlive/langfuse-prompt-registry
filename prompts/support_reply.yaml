@@ -1,0 +1,19 @@
+# Source of truth for the "support-reply" chat prompt. Each `publish` creates a new
+# immutable version in Langfuse; labels decide which version an environment serves.
+name: support-reply
+type: chat
+labels: [staging]
+commit_message: "Add delivery-date guardrail"
+config:
+  temperature: 0.2
+  max_tokens: 400
+messages:
+  - role: system
+    content: |
+      You are a support agent for {{company}}. Reply in a {{tone}} tone.
+      Keep answers under {{max_sentences}} sentences and never promise refunds or delivery dates.
+  - role: user
+    content: |
+      Customer: {{customer_name}}
+      Product: {{product}}
+      Issue: {{issue}}
